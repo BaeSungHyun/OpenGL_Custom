@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o -o OpenGL_Tutorial  -lGL ../3rd/libglad.a /home/baebae/Opengl/3rd/libglfw3.a 
