@@ -8,6 +8,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: /home/baebae/Opengl/app/main.cpp 
   /home/baebae/Opengl/app/pre_rendering.h \
   /home/baebae/Opengl/app/rendering.h \
   /home/baebae/Opengl/app/shader.h \
+  /home/baebae/Opengl/app/vertex.h \
   /home/baebae/Opengl/include/GLFW/glfw3.h \
   /home/baebae/Opengl/include/KHR/khrplatform.h \
   /home/baebae/Opengl/include/glad/glad.h \
@@ -493,6 +494,10 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/c++/11/cerrno:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
@@ -565,6 +570,8 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 
 /usr/include/c++/11/bits/locale_classes.h:
 
+/usr/include/c++/11/bits/stl_algobase.h:
+
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/c++/11/backward/binders.h:
@@ -585,20 +592,6 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/c++/11/bits/basic_ios.h:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/c++/11/string:
-
-/usr/include/c++/11/bits/allocator.h:
-
-/usr/include/c++/11/bits/std_abs.h:
-
-/usr/include/c++/11/bits/functional_hash.h:
-
 /home/baebae/Opengl/include/glad/glad.h:
 
 /usr/include/c++/11/streambuf:
@@ -608,6 +601,8 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 /usr/include/c++/11/bits/locale_classes.tcc:
 
 /home/baebae/Opengl/include/GLFW/glfw3.h:
+
+/home/baebae/Opengl/app/vertex.h:
 
 /usr/include/c++/11/clocale:
 
@@ -639,8 +634,6 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 
 /home/baebae/Opengl/app/includes.h:
 
-/usr/include/c++/11/bits/stl_algobase.h:
-
 /usr/include/c++/11/bits/basic_ios.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
@@ -666,6 +659,20 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/c++/11/bits/functexcept.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/c++/11/bits/basic_ios.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/c++/11/string:
+
+/usr/include/c++/11/bits/allocator.h:
+
+/usr/include/c++/11/bits/std_abs.h:
+
+/usr/include/c++/11/bits/functional_hash.h:
 
 /usr/include/c++/11/bits/stl_pair.h:
 
@@ -872,7 +879,3 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:

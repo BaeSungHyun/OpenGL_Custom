@@ -10,31 +10,46 @@ template <typename T>
 class Renderer : public Pre_Rendering<T> {
 public:
     Renderer() {};
-    ~Renderer() {
+    ~Renderer() {};
+
+    enum class DrawMode{
+        DRAWARRAY,
+        DRAWELEMENTS
     };
 
-    void render() {
-        glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+    void glSettings(const std::initializer_list<T>& rgba) {
+        float temp[4] {};
+        auto first = rgba.begin();
+        for (int i{0}; first != rgba.end(); first++, i++) {
+            temp[i] = *first; 
+        }
+
+        glClearColor(temp[0], temp[1], temp[2], temp[3]);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
 
-        this->useShaderProgram();
-
+    void render(DrawMode mode) {
         glBindVertexArray(this->VAO);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        switch (mode) {
+            case DrawMode::DRAWARRAY : {
+                glDrawArrays(GL_TRIANGLES, 0, this->totalVertices);
+                break;
+            }
+            case DrawMode::DRAWELEMENTS : {
+                float timeValue = glfwGetTime();
+                float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+
+                int vertexColorLocation = this->shaderProgram.findUniformLocation("ourColor");
+                this->shaderProgram.changeUniformFloat(vertexColorLocation, {0.0f, greenValue, 0.0f, 1.0f});
+                glDrawElements(GL_TRIANGLES, this->totalVertices, GL_UNSIGNED_INT, 0); 
+                break;
+            }
+        }
     };
+
+    
 };
-
-void renderTriangle(const unsigned int& shaderProgram, const unsigned int& VAO) {
-    glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glUseProgram(shaderProgram);
-
-    glBindVertexArray(VAO);
-
-    glDrawArrays(GL_TRIANGLES, 0, 3); // currently active shader, the previously defined vertex attribute configuration method and with the VBO's vertex data (indirectly bound via the VAO)
-}
 
 void renderRectangle(const unsigned int& shaderProgram, const unsigned int& VAO) {
     glClearColor(0.2f, 0.2f, 0.3f, 1.0f);

@@ -9,6 +9,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o
  /home/baebae/Opengl/app/pre_rendering.h
  /home/baebae/Opengl/app/rendering.h
  /home/baebae/Opengl/app/shader.h
+ /home/baebae/Opengl/app/vertex.h
  /home/baebae/Opengl/include/GLFW/glfw3.h
  /home/baebae/Opengl/include/KHR/khrplatform.h
  /home/baebae/Opengl/include/glad/glad.h

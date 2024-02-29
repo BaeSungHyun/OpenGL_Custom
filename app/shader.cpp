@@ -94,13 +94,16 @@ void Shader::deleteProgram() {
     glDeleteProgram(ID);
 }
 
-template<typename T>
-void Shader::set(const std::string& name, T value) const {
-    if (std::is_same<T, bool>::value || std::is_same<T, int>::value ) { // :: way to access static member function
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
-    }
-
-    if (std::is_same<T, float>::value) {
-        glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
-    }
+int Shader::findUniformLocation(const std::string &name) const
+{
+    return glGetUniformLocation(ID, name.c_str());
 }
+
+void Shader::changeUniformFloat(const int& loc, const std::initializer_list<float>& value) const{
+    float temp_val[4] {};
+    auto temp = value.begin();
+    for (int i = 0 ; temp != value.end(); temp++, i++)
+        temp_val[i] = *temp;
+    glUniform4f(loc, temp_val[0], temp_val[1], temp_val[2], temp_val[3]);
+}
+

@@ -26,18 +26,20 @@ int main(int, char**){
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    // Setting for Rendering
-    unsigned int shaderProgram, VAO, VBO, EBO;
-
     Renderer<float> renderer {};
-    renderer.sample_triangle();
+    renderer.useShaderProgram(); // shader program in use
+
+    // renderer.sample_triangle();
+    renderer.sample_rectangle();
+
 
     // Simple render loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
+        renderer.glSettings({0.2f, 0.2f, 0.2f, 1.0f});
         // Rendering Commands
-        renderer.render();
+        renderer.render(Renderer<float>::DrawMode::DRAWELEMENTS);
          
         renderLoop(window);
     }
