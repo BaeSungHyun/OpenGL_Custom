@@ -30,6 +30,7 @@ public:
     int findUniformLocation(const std::string& name) const; 
 
     void changeUniformFloat(const int& loc, const std::initializer_list<float>& value) const; 
+    void changeUniformGlm(const int& loc, const float* value) const;
 };
 
 

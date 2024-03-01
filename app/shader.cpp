@@ -107,3 +107,7 @@ void Shader::changeUniformFloat(const int& loc, const std::initializer_list<floa
     glUniform4f(loc, temp_val[0], temp_val[1], temp_val[2], temp_val[3]);
 }
 
+void Shader::changeUniformGlm(const int& loc, const float* value) const {
+    glUniformMatrix4fv(loc, 1, GL_FALSE, value);
+}
+

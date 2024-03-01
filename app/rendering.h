@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <math.h>
 #include "pre_rendering.h"
+#include "glSpace.h"
 
 template <typename T>
 class Renderer : public Pre_Rendering<T> {
@@ -47,5 +48,42 @@ public:
             }
         }
     };
+
+    void translateObjectMat(const glm::vec3& translation) {
+        glSpace.translateObjectT(translation);
+    }
+    void rotateObjectMat(const float& angleDegrees, const glm::vec3& axis) {
+        glSpace.rotateObjectR(angleDegrees, axis);
+    }
+
+    void translateViewMat(const glm::vec3& translation) {
+        glSpace.translateViewT(translation);
+    }
+    void rotateViewMat(const float& angleDegrees, const glm::vec3& axis) {
+        glSpace.rotateViewR(angleDegrees, axis);
+    } 
+
+    void setProjectionPerspective(const float& fovDegree, const float& width, 
+            const float& height, const float& zNear, const float& zFar) {
+        glSpace.perspective(fovDegree, width, height, zNear, zFar);
+    }
+
+    void setUniformObject() const {
+        int modelLoc = this->shaderProgram.findUniformLocation("object");
+        this->shaderProgram.changeUniformGlm(modelLoc, glm::value_ptr(glSpace.getObjectMatrix()));
+    }
+
+    void setUniformView() const {
+        int viewLoc = this->shaderProgram.findUniformLocation("view");
+        this->shaderProgram.changeUniformGlm(viewLoc, glm::value_ptr(glSpace.getViewMatrix()));
+    }
+
+    void setUniformProjection() const {
+        int projectionLoc = this->shaderProgram.findUniformLocation("projection");
+        this->shaderProgram.changeUniformGlm(projectionLoc, glm::value_ptr(glSpace.getPerspective()));
+    }
+
+private:
+    GlSpace glSpace;
 };
 #endif

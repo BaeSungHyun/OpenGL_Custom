@@ -1,6 +1,12 @@
 [
 {
   "directory": "/home/baebae/Opengl/build/app",
+  "command": "/usr/bin/g++  -I/home/baebae/Opengl/include/{CMAKE_CURRENT_SOURCE_DIR} -I/home/baebae/Opengl/include -g -o CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o -c /home/baebae/Opengl/app/glSpace.cpp",
+  "file": "/home/baebae/Opengl/app/glSpace.cpp",
+  "output": "app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o"
+},
+{
+  "directory": "/home/baebae/Opengl/build/app",
   "command": "/usr/bin/g++  -I/home/baebae/Opengl/include/{CMAKE_CURRENT_SOURCE_DIR} -I/home/baebae/Opengl/include -g -o CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o -c /home/baebae/Opengl/app/shader.cpp",
   "file": "/home/baebae/Opengl/app/shader.cpp",
   "output": "app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o"

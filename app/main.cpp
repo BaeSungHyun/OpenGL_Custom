@@ -2,12 +2,7 @@
 
 #include "includes.h"
 
-#include <glm/common.hpp>
-
-
 int main(int, char**){
-    std::cout << "glm invoked" << std::endl;
-
     windowInit();
 
     GLFWwindow* window {createWindow()};
@@ -19,6 +14,7 @@ int main(int, char**){
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
 
     // Tell OpenGL the size of the rendering window so OpenGL knows how to display the data and coordinates
     // It's actually okay to make it smaller than the window size, then the OpenGL rendering will be displayed
@@ -33,6 +29,15 @@ int main(int, char**){
     Renderer<float> renderer {};
     renderer.useShaderProgram(); // shader program in use
 
+    renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    renderer.translateViewMat(glm::vec3(0.0f, 0.0f, -3.0f));
+    renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
+
+    renderer.setUniformObject();
+    renderer.setUniformView();
+    renderer.setUniformProjection();
+
+    // SAMPLES
     // renderer.sample_triangle();
     renderer.sample_rectangle();
 

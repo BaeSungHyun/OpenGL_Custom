@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o"
+  "CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o.d"
   "CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o"
   "CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o.d"
   "CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o"
