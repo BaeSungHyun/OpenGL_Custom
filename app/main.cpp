@@ -30,7 +30,7 @@ int main(int, char**){
     renderer.useShaderProgram(); // shader program in use
 
     renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    renderer.translateViewMat(glm::vec3(0.0f, 0.0f, -3.0f));
+    renderer.translateViewMat(glm::vec3(0.0f, 0.0f, -5.0f));
     renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
 
     renderer.setUniformObject();
@@ -49,7 +49,16 @@ int main(int, char**){
         renderer.glSettings({0.2f, 0.2f, 0.2f, 1.0f});
         // Rendering Commands
         // renderer.render(Renderer<float>::DrawMode::DRAWARRAY);
-        renderer.render(Renderer<float>::DrawMode::DRAWELEMENTS);
+        // renderer.render(Renderer<float>::DrawMode::DRAWELEMENTS);
+
+
+        for (int i = 0; i < 10; i++) {
+            renderer.rotateObjectMat(20.0f * i, glm::vec3(0.0f, 1.0f, 0.0f));
+            renderer.translateObjectMat(glm::vec3(0.0f, 0.0f, -0.05f));
+            renderer.setUniformObject();
+
+            renderer.render(Renderer<float>::DrawMode::DRAWELEMENTS);
+        }
          
         renderLoop(window);
     }

@@ -19,7 +19,7 @@ void GlSpace::rotateObjectR(const float& angleDegrees, const glm::vec3& axis) {
     float angleRadians = glm::radians(angleDegrees);
     // Create a quaternion representing the rotation
     qObjectR = glm::angleAxis(angleRadians, glm::normalize(axis));
-    mObjectR = glm::toMat4(qObjectR);
+    mObjectR = mObjectR * glm::toMat4(qObjectR);
 }
 
 void GlSpace::translateObjectT(const glm::vec3& translation) {
@@ -32,7 +32,7 @@ void GlSpace::rotateViewR(const float& angleDegrees, const glm::vec3& axis) {
     float angleRadians = glm::radians(angleDegrees);
     // Create a quaternion representing the rotation
     qViewR = glm::angleAxis(angleRadians, glm::normalize(axis));
-    mViewR = glm::toMat4(qViewR);
+    mViewR = mViewR * glm::toMat4(qViewR);
 }
 
 void GlSpace::translateViewT(const glm::vec3& translation) {

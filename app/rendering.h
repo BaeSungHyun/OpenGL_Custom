@@ -38,6 +38,7 @@ public:
                 break;
             }
             case DrawMode::DRAWELEMENTS : {
+                // Sample Control
                 float timeValue = glfwGetTime();
                 float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
 
@@ -69,8 +70,8 @@ public:
     }
 
     void setUniformObject() const {
-        int modelLoc = this->shaderProgram.findUniformLocation("object");
-        this->shaderProgram.changeUniformGlm(modelLoc, glm::value_ptr(glSpace.getObjectMatrix()));
+        int objectLoc = this->shaderProgram.findUniformLocation("object");
+        this->shaderProgram.changeUniformGlm(objectLoc, glm::value_ptr(glSpace.getObjectMatrix()));
     }
 
     void setUniformView() const {
