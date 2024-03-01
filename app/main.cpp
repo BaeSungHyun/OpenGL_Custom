@@ -2,8 +2,12 @@
 
 #include "includes.h"
 
+#include <glm/common.hpp>
+
 
 int main(int, char**){
+    std::cout << "glm invoked" << std::endl;
+
     windowInit();
 
     GLFWwindow* window {createWindow()};
@@ -39,6 +43,7 @@ int main(int, char**){
 
         renderer.glSettings({0.2f, 0.2f, 0.2f, 1.0f});
         // Rendering Commands
+        // renderer.render(Renderer<float>::DrawMode::DRAWARRAY);
         renderer.render(Renderer<float>::DrawMode::DRAWELEMENTS);
          
         renderLoop(window);

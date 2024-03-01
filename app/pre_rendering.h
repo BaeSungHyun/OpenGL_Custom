@@ -6,6 +6,7 @@
 #include "vertex.h"
 
 
+
 // OpenGL Binding Object Class
 template <typename T>
 class Pre_Rendering {
@@ -44,7 +45,7 @@ protected:
     Vertex<T>* pVertexArray;
 
     // Total Number of Vertices
-    unsigned int totalVertices;
+    int totalVertices;
 };
 
 
@@ -87,7 +88,7 @@ void Pre_Rendering<T>::release_memory() {
 template <typename T>
 void Pre_Rendering<T>::addVertices(const Vertices<T>& inputs) {
     pVertices[size_pVertices - 1].addVertices(inputs);
-    totalVertices += static_cast<unsigned int>(inputs.vecVertex.size());
+    totalVertices += static_cast<int>(inputs.vecVertex.size());
 }
 
 template <typename T>
@@ -108,7 +109,7 @@ void Pre_Rendering<T>::sample_triangle() {
     vectorToArray();    
 
     glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex<T>) * static_cast<unsigned int>(pVertices[size_pVertices - 1].vecVertex.size()), 
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex<T>) * (pVertices[size_pVertices - 1].vecVertex.size()), 
                    pVertexArray , GL_STATIC_DRAW);
 
     glGenVertexArrays(1, &VAO);
@@ -117,11 +118,11 @@ void Pre_Rendering<T>::sample_triangle() {
     glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]);
 
     // location = 0 : pos
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<float>), (const void*)offsetof(Vertex<T>, pos));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, pos));
     glEnableVertexAttribArray(0);
 
     // locatoni = 1 : color
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<float>), (const void*)offsetof(Vertex<T>, rgba));
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, rgba));
     glEnableVertexAttribArray(1);
 }
 
@@ -146,24 +147,24 @@ void Pre_Rendering<T>::sample_rectangle() {
     vectorToArray();
 
     glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex<T>) * static_cast<unsigned int>(pVertices[size_pVertices - 1].vecVertex.size()),
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex<T>) * (pVertices[size_pVertices - 1].vecVertex.size()),
                     pVertexArray, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_buffer_obj[EBO]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * totalVertices, indices, GL_STATIC_DRAW);
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_buffer_obj[EBO]);
+    glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]);
 
     // location = 0 : pos
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<float>), (const void*)offsetof(Vertex<T>, pos));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, pos));
     glEnableVertexAttribArray(0);
 
     // location = 1 : color
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<float>), (const void*)offsetof(Vertex<T>, rgba));
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, rgba));
     glEnableVertexAttribArray(1);    
 
 }
