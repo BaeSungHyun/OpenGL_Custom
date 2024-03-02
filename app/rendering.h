@@ -62,6 +62,15 @@ public:
     }
     void rotateViewMat(const float& angleDegrees, const glm::vec3& axis) {
         glSpace.rotateViewR(angleDegrees, axis);
+    }
+
+    void setCamera(const glm::vec3& pos, const glm::vec3& tar) {
+        glSpace.setCamPos(pos);
+        glSpace.setCamTar(tar);
+        glSpace.setCamAxes();
+
+        glSpace.setViewTByCam();
+        glSpace.setViewRByCam();
     } 
 
     void setProjectionPerspective(const float& fovDegree, const float& width, 
