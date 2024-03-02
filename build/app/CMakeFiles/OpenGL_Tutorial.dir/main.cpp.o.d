@@ -151,18 +151,8 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: \
  /home/baebae/Opengl/include/KHR/khrplatform.h \
  /home/baebae/Opengl/include/GLFW/glfw3.h \
  /home/baebae/Opengl/app/init_functions.h \
- /home/baebae/Opengl/app/shader.h /usr/include/c++/11/fstream \
- /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc \
- /home/baebae/Opengl/app/pre_rendering.h /home/baebae/Opengl/app/vertex.h \
- /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
- /usr/include/c++/11/bits/stl_vector.h \
- /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc /home/baebae/Opengl/app/rendering.h \
- /usr/include/c++/11/math.h /usr/include/c++/11/cmath /usr/include/math.h \
+ /home/baebae/Opengl/app/rendering.h /usr/include/c++/11/math.h \
+ /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -185,7 +175,16 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
- /home/baebae/Opengl/app/glSpace.h \
+ /home/baebae/Opengl/app/pre_rendering.h /home/baebae/Opengl/app/shader.h \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc /home/baebae/Opengl/app/vertex.h \
+ /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc /home/baebae/Opengl/app/glSpace.h \
  /home/baebae/Opengl/include/glm/glm.hpp \
  /home/baebae/Opengl/include/glm/detail/_fixes.hpp \
  /home/baebae/Opengl/include/glm/detail/setup.hpp \

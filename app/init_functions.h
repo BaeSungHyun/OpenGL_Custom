@@ -4,9 +4,11 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "rendering.h"
 
-#define WIDTH 800
-#define HEIGHT 600
+int WIDTH = 800;
+int HEIGHT = 600;
+
 
 void windowInit() {
     glfwInit();
