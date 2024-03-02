@@ -42,7 +42,6 @@ int main(int, char**){
     // renderer.sample_triangle();
     renderer.sample_rectangle();
 
-
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
@@ -53,6 +52,29 @@ int main(int, char**){
             renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
             renderer.setUniformProjection();
             FRAMEBUFFER_RESIZE = false;
+        }
+        
+        if (MOUSE_RBUTTON) {        
+            float xOffset = XPOS - LAST_XPOS;
+            float yOffset = LAST_YPOS - YPOS; // OpenGL Coordinate and Window y-axis is reversed
+
+            xOffset *= MOUSE_SENSITIVITY;
+            yOffset *= MOUSE_SENSITIVITY;
+
+            if (KEY_SHIFT) {
+                
+            } else if (KEY_CTRL) {
+
+            } else {
+                glm::vec3 tempAxis = glm::vec3(yOffset , -xOffset, 0);
+                if (tempAxis[1] < 0) 
+                    tempAxis = -tempAxis;
+                float offset = xOffset * xOffset + yOffset * yOffset;
+                if (LAST_XPOS < XPOS) offset *= -1;
+                // FIX IT !!! --- think about left of rule of frame
+                renderer.rotateViewMat( offset, tempAxis);
+                renderer.setUniformView();
+            }
         }
 
         // Rendering Commands

@@ -44,7 +44,7 @@ public:
 
                 int vertexColorLocation = this->shaderProgram.findUniformLocation("uniColor");
                 this->shaderProgram.changeUniformFloat(vertexColorLocation, {0.0f, greenValue, 0.0f, 1.0f});
-                glDrawElements(GL_TRIANGLES, this->totalVertices, GL_UNSIGNED_INT, 0); 
+                glDrawElements(GL_TRIANGLES, this->totalIndices, GL_UNSIGNED_INT, 0); 
                 break;
             }
         }

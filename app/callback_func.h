@@ -17,6 +17,9 @@ bool KEY_CTRL = false;
 float XPOS = 0.0f;
 float YPOS = 0.0f;
 
+float LAST_XPOS = 0.0f;
+float LAST_YPOS = 0.0f;
+
 // callback function for window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
@@ -33,6 +36,9 @@ void processInput(GLFWwindow* window) {
 
 // callback function for tracing cursor movement
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+    LAST_XPOS = XPOS;
+    LAST_YPOS = YPOS;
+
     XPOS = xpos;
     YPOS = ypos;
 }

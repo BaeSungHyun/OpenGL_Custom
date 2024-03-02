@@ -15,6 +15,8 @@ public:
     ~Pre_Rendering();
 
     void addVertices(const Vertices<T>& inputs);
+    void addIndices(const std::vector<unsigned int>&);
+
     void useShaderProgram();
 
     void vectorToArray();
@@ -35,7 +37,8 @@ protected:
     unsigned int VAO;
     unsigned int gl_buffer_obj [ OBJ_SIZE ];
     // EBO Indices
-    unsigned int* indices;
+    unsigned int* pIndices;
+    std::vector<unsigned int> vecIndices;
 
     // Vector of Vertex Array
     Vertices<T>* pVertices;
@@ -44,8 +47,9 @@ protected:
     // Vertex Array
     Vertex<T>* pVertexArray;
 
-    // Total Number of Vertices
+    // Total Number of Vertices and Indices
     int totalVertices;
+    int totalIndices;
 };
 
 
@@ -53,8 +57,8 @@ protected:
 template <typename T>
 Pre_Rendering<T>::Pre_Rendering() : 
     shaderProgram("/home/baebae/Opengl/glsl/vertex.shader", "/home/baebae/Opengl/glsl/fragment.shader"),
-    size_pVertices(1), indices (nullptr),
-    VAO(0), totalVertices(0)
+    size_pVertices(1), pIndices (nullptr),
+    VAO(0), totalVertices(0), totalIndices(0)
 {
     pVertices = new Vertices<T> [size_pVertices];
 
@@ -68,8 +72,7 @@ Pre_Rendering<T>::~Pre_Rendering() {
     delete[] pVertices;
     pVertices = nullptr;
     pVertexArray = nullptr;
-    delete[] indices;
-    indices = nullptr;
+    pIndices = nullptr;
 }
 
 template <typename T>
@@ -89,6 +92,14 @@ template <typename T>
 void Pre_Rendering<T>::addVertices(const Vertices<T>& inputs) {
     pVertices[size_pVertices - 1].addVertices(inputs);
     totalVertices += static_cast<int>(inputs.vecVertex.size());
+}
+
+template <typename T>
+void Pre_Rendering<T>::addIndices(const std::vector<unsigned int>& indices) {
+    totalIndices += static_cast<int>(indices.size());
+    vecIndices.insert(vecIndices.end(), std::make_move_iterator(indices.begin()), 
+            std::make_move_iterator(indices.end()));
+    pIndices = &(vecIndices[0]);
 }
 
 template <typename T>
@@ -121,7 +132,7 @@ void Pre_Rendering<T>::sample_triangle() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, pos));
     glEnableVertexAttribArray(0);
 
-    // locatoni = 1 : color
+    // locatIon = 1 : color
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, rgba));
     glEnableVertexAttribArray(1);
 }
@@ -136,11 +147,7 @@ void Pre_Rendering<T>::sample_rectangle() {
         {-0.5f, 0.5f, 0.0f}
     });
 
-    // MODIFY IT !!!!
-    if (indices == nullptr) {
-        indices = new unsigned int[] {0, 1, 3, 1, 2, 3};
-        totalVertices = 6;
-    }
+    addIndices(std::vector<unsigned int> {0, 1, 3, 1, 2, 3});
 
     glGenBuffers(OBJ_SIZE, gl_buffer_obj);
 
@@ -151,7 +158,7 @@ void Pre_Rendering<T>::sample_rectangle() {
                     pVertexArray, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_buffer_obj[EBO]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * totalVertices, indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * totalIndices, (const void*)(pIndices), GL_STATIC_DRAW);
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
