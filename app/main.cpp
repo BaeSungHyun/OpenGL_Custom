@@ -24,6 +24,7 @@ int main(int, char**){
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetScrollCallback(window, scroll_callback);
 
     Renderer<float> renderer {}; // Global Variable
 
@@ -32,7 +33,7 @@ int main(int, char**){
 
     renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
     renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
-    renderer.setCamera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f)); // cameraPos, targetPos
+    renderer.setCamera(glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f)); // cameraPos, targetPos
 
     renderer.setUniformObject();
     renderer.setUniformView();
@@ -54,7 +55,7 @@ int main(int, char**){
             FRAMEBUFFER_RESIZE = false;
         }
         
-        if (MOUSE_RBUTTON) {        
+        if (MOUSE_RBUTTON && B_POS) {        
             float xOffset = XPOS - LAST_XPOS;
             float yOffset = LAST_YPOS - YPOS; // OpenGL Coordinate and Window y-axis is reversed
 
@@ -71,10 +72,18 @@ int main(int, char**){
                     tempAxis = -tempAxis;
                 float offset = xOffset * xOffset + yOffset * yOffset;
                 if (LAST_XPOS < XPOS) offset *= -1;
-                // FIX IT !!! --- think about left of rule of frame
+
                 renderer.rotateEyeMat( offset, tempAxis);
                 renderer.setUniformView();
             }
+
+            B_POS = false;
+        }
+
+        if (B_FOV) {
+            renderer.setProjectionPerspective(FOV, WIDTH, HEIGHT,0.1f, 100.0f);
+            renderer.setUniformProjection();
+            B_POS = false;
         }
 
         // Rendering Commands

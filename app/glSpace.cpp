@@ -71,7 +71,7 @@ void GlSpace::perspective(const float& fovDegree, const float& width,
 }
 
 void GlSpace::ortho() {
-
+    
 }
 
 

@@ -14,11 +14,15 @@ bool MOUSE_LBUTTON = false;
 bool KEY_SHIFT = false;
 bool KEY_CTRL = false;
 
+bool B_POS = false; // if MOUSE POSITION changed
 float XPOS = 0.0f;
 float YPOS = 0.0f;
 
 float LAST_XPOS = 0.0f;
 float LAST_YPOS = 0.0f;
+
+bool B_FOV = false; // if FOV is modified
+float FOV = 45.0f; // default 45.0f -- controls zoom amount 
 
 // callback function for window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -39,8 +43,10 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
     LAST_XPOS = XPOS;
     LAST_YPOS = YPOS;
 
-    XPOS = xpos;
-    YPOS = ypos;
+    XPOS = (float)xpos;
+    YPOS = (float)ypos;
+
+    B_POS = true;
 }
 
 // callback function for tracing mouse click
@@ -97,6 +103,18 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
             break;
         }
     }
+}
+
+// Callback function for scrolling
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    // yoffset : amoung we scrolled vertically
+    FOV -= (float)yoffset;
+    if (FOV < 1.0f) 
+        FOV = 1.0f;
+    if (FOV > 45.0f)
+        FOV = 45.0f; 
+
+    B_FOV = true;
 }
 
 #endif
