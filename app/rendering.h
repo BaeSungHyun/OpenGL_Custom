@@ -63,6 +63,14 @@ public:
     void rotateViewMat(const float& angleDegrees, const glm::vec3& axis) {
         glSpace.rotateViewR(angleDegrees, axis);
     }
+    void translateEyeMat(const glm::vec3& translation) {
+        glSpace.translateEyeT(translation);
+        glSpace.convertEyeToView();
+    }
+    void rotateEyeMat(const float& angleDegrees, const glm::vec3& axis) {
+        glSpace.rotateEyeR(angleDegrees, axis);
+        glSpace.convertEyeToView();
+    }
 
     void setCamera(const glm::vec3& pos, const glm::vec3& tar) {
         glSpace.setCamPos(pos);

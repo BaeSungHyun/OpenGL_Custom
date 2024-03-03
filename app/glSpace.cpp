@@ -1,11 +1,13 @@
 #include "glSpace.h"
 
 GlSpace::GlSpace() :
-    mObjectT(glm::mat4(1.0f)), mObjectR(glm::mat4(1.0f)),
-    qObjectR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)),
-    mViewT(glm::mat4(1.0f)), mViewR(glm::mat4(1.0f)),
-    qViewR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)),
-    cameraPos(), cameraTarget(), cameraX(), cameraY(), cameraZ()
+    mObjectT(glm::mat4(1.0f)), mObjectR(glm::mat4(1.0f)), // Object Matrix (Translation + Rotation)
+    qObjectR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)), // Object Quaternion for Rotation
+    mViewT(glm::mat4(1.0f)), mViewR(glm::mat4(1.0f)), // View Matrix (Translation + Rotation)
+    qViewR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)), // View Quaternion for Rotation
+    mEyeT(glm::mat4(1.0f)), mEyeR(glm::mat4(1.0f)), // Eye Matrix (Translation + Rotation)
+    qEyeR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)), // Eye Quaternion for Rotation
+    cameraPos(), cameraTarget(), cameraX(), cameraY(), cameraZ() // camera Vectors default initialized
 {
     // all matrix initialized with Identity Matrix
     // Quaternion initialized to w = 1.0f and other = 0.0f
@@ -41,6 +43,27 @@ void GlSpace::translateViewT(const glm::vec3& translation) {
     mViewT[3] = mViewT[3] + glm::vec4(translation, 0.0f);
 }
 
+// Eye Matrix
+void GlSpace::rotateEyeR(const float& angleDegrees, const glm::vec3& axis) {
+    float angleRadians = glm::radians(angleDegrees);
+    // Create a quaternion representing the rotation
+    qEyeR = glm::angleAxis(angleRadians, glm::normalize(axis));
+    mEyeR = mEyeR * glm::toMat4(qEyeR);
+}
+
+void GlSpace::translateEyeT(const glm::vec3& translation) {
+    mEyeT[3] = mEyeT[3] + glm::vec4(translation, 0.0f);
+}
+
+void GlSpace::convertEyeToView() {
+    mViewT[3] = glm::vec4(-mEyeT[3][0], -mEyeT[3][1], -mEyeT[3][2], 1.0f);
+
+    mViewR[0] = mEyeR[0];
+    mViewR[1] = mEyeR[1];
+    mViewR[2] = mEyeR[2];
+    mViewR = glm::transpose(mViewR);
+}
+
 // Projection Matrix
 void GlSpace::perspective(const float& fovDegree, const float& width, 
     const float& height, const float& zNear, const float& zFar) {
@@ -69,6 +92,7 @@ void GlSpace::setCamAxes() {
 
 void GlSpace::setViewTByCam() {
     mViewT[3] = glm::vec4(-cameraPos, 1.0f);
+    mEyeT[3] = glm::vec4(cameraPos, 1.0f);
 }
 
 void GlSpace::setViewRByCam() {
@@ -76,6 +100,10 @@ void GlSpace::setViewRByCam() {
     mViewR[1] = glm::vec4(cameraY, 0.0f);
     mViewR[2] = glm::vec4(cameraZ, 0.0f);
     mViewR = glm::transpose(mViewR);
+
+    mEyeR[0] = glm::vec4(cameraX, 0.0f);
+    mEyeR[1] = glm::vec4(cameraY, 0.0f);
+    mEyeR[2] = glm::vec4(cameraZ, 0.0f);
 }
 
 
@@ -85,7 +113,7 @@ glm::mat4 GlSpace::getObjectMatrix() const {
 }
 
 glm::mat4 GlSpace::getViewMatrix() const {
-    return mViewT * mViewR;
+    return mViewR * mViewT; // Reverse Order because mEyeR * mEyeT
 }
 
 glm::mat4 GlSpace::getPerspective() const {

@@ -23,6 +23,10 @@ public:
     // View Matrix (inverse of Eye Matrix) - Recommended to use Camera Methods
     void rotateViewR(const float& angleDegrees, const glm::vec3& axis);
     void translateViewT(const glm::vec3& translation);
+    // Eye Matrix
+    void rotateEyeR(const float& angleDegrees, const glm::vec3& axis);
+    void translateEyeT(const glm::vec3& translation);
+    void convertEyeToView();
     // Projection Matrix
     void perspective(const float&, const float&, const float&, const float&, const float&);
     void ortho();
@@ -47,6 +51,10 @@ private:
     glm::mat4 mViewT; // View Matrix - Inverse of Eye Matrix ( Translate Part )
     glm::mat4 mViewR; // View Matrix - Inverse of Eye Matrix ( Rotate Part )
     glm::quat qViewR; // View Quaternion ( Rotate Part )
+
+    glm::mat4 mEyeT; // Eye Matrix ( Translate Part )
+    glm::mat4 mEyeR; // Eye Matrix ( Rotate Part )
+    glm::quat qEyeR; // Eye Quaternion ( Rotate Part )
 
     glm::vec3 cameraPos; // Camera Position - it's the world that is moving, not camera
     glm::vec3 cameraTarget; // Camera Target

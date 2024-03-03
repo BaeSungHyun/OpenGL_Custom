@@ -72,7 +72,7 @@ int main(int, char**){
                 float offset = xOffset * xOffset + yOffset * yOffset;
                 if (LAST_XPOS < XPOS) offset *= -1;
                 // FIX IT !!! --- think about left of rule of frame
-                renderer.rotateViewMat( offset, tempAxis);
+                renderer.rotateEyeMat( offset, tempAxis);
                 renderer.setUniformView();
             }
         }
