@@ -54,7 +54,7 @@ public:
         glSpace.translateObjectT(translation);
     }
     void rotateObjectMat(const float& angleDegrees, const glm::vec3& axis) {
-        glSpace.rotateObjectR(angleDegrees, axis);
+        glSpace.rotateObjectRPost(angleDegrees, axis);
     }
 
     void translateViewMat(const glm::vec3& translation) {
@@ -77,8 +77,8 @@ public:
         glSpace.setCamTar(tar);
         glSpace.setCamAxes();
 
-        glSpace.setViewTByCam();
-        glSpace.setViewRByCam();
+        glSpace.setViewTByCam(); // Eye
+        glSpace.setViewRByCam(); // Eye
     } 
 
     void setProjectionPerspective(const float& fovDegree, const float& width, 
@@ -90,7 +90,7 @@ public:
         int objectLoc = this->shaderProgram.findUniformLocation("object");
         this->shaderProgram.changeUniformGlm(objectLoc, glm::value_ptr(glSpace.getObjectMatrix()));
     }
-
+    // Eye
     void setUniformView() const {
         int viewLoc = this->shaderProgram.findUniformLocation("view");
         this->shaderProgram.changeUniformGlm(viewLoc, glm::value_ptr(glSpace.getViewMatrix()));

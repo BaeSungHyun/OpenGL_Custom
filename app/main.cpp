@@ -31,8 +31,8 @@ int main(int, char**){
     // Renderer as global variable    
     renderer.useShaderProgram(); // shader program in use
 
-    renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
+    // renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, NEAR, FAR);
     renderer.setCamera(glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f)); // cameraPos, targetPos
 
     renderer.setUniformObject();
@@ -62,18 +62,24 @@ int main(int, char**){
             xOffset *= MOUSE_SENSITIVITY;
             yOffset *= MOUSE_SENSITIVITY;
 
+            glm::vec3 tempAxis = glm::vec3(yOffset , -xOffset, 0);
+            if (tempAxis[1] < 0) 
+                tempAxis = -tempAxis;
+            float offset = xOffset * xOffset + yOffset * yOffset;
+
+            if (LAST_XPOS < XPOS) offset *= -1;
+
             if (KEY_SHIFT) {
-                
+                // World (Object) Rotation
+                renderer.rotateObjectMat(offset, -tempAxis); // minus Axis
+                renderer.setUniformObject();
             } else if (KEY_CTRL) {
-
+                // Eye Translation
+                renderer.translateEyeMat(glm::vec3(xOffset, yOffset, 0.0f));
+                renderer.setUniformView();
             } else {
-                glm::vec3 tempAxis = glm::vec3(yOffset , -xOffset, 0);
-                if (tempAxis[1] < 0) 
-                    tempAxis = -tempAxis;
-                float offset = xOffset * xOffset + yOffset * yOffset;
-                if (LAST_XPOS < XPOS) offset *= -1;
-
-                renderer.rotateEyeMat( offset, tempAxis);
+                // Eye Rotation
+                renderer.rotateEyeMat( offset, tempAxis); // plus Axis
                 renderer.setUniformView();
             }
 

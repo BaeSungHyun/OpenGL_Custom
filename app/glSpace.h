@@ -18,7 +18,7 @@ public:
     GlSpace();
     ~GlSpace();
     // Object Matrix
-    void rotateObjectR(const float& angleDegrees, const glm::vec3& axis);
+    void rotateObjectRPost(const float& angleDegrees, const glm::vec3& axis);
     void translateObjectT(const glm::vec3& translation);
     // View Matrix (inverse of Eye Matrix) - Recommended to use Camera Methods
     void rotateViewR(const float& angleDegrees, const glm::vec3& axis);

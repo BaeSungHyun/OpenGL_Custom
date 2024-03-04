@@ -18,11 +18,11 @@ GlSpace::~GlSpace() {
 }
 
 // Object (Model) Matrix
-void GlSpace::rotateObjectR(const float& angleDegrees, const glm::vec3& axis) {
+void GlSpace::rotateObjectRPost(const float& angleDegrees, const glm::vec3& axis) {
     float angleRadians = glm::radians(angleDegrees);
     // Create a quaternion representing the rotation
     qObjectR = glm::angleAxis(angleRadians, glm::normalize(axis));
-    mObjectR = mObjectR * glm::toMat4(qObjectR);
+    mObjectR = glm::toMat4(qObjectR) * mObjectR; // alter the order for global rotation upon Three-Axis (x,y,z)
 }
 
 void GlSpace::translateObjectT(const glm::vec3& translation) {
@@ -30,14 +30,14 @@ void GlSpace::translateObjectT(const glm::vec3& translation) {
     mObjectT[3] = mObjectT[3] + glm::vec4(translation, 0.0f);
 }
 
-// View Matrix (Inverse of Eye Matrix)
+// View Matrix (Inverse of Eye Matrix) --- Deprecated, use Eye instead
 void GlSpace::rotateViewR(const float& angleDegrees, const glm::vec3& axis) {
     float angleRadians = glm::radians(angleDegrees);
     // Create a quaternion representing the rotation
     qViewR = glm::angleAxis(angleRadians, glm::normalize(axis));
     mViewR = mViewR * glm::toMat4(qViewR);
 }
-
+// --- Deprecated, use Eye instead
 void GlSpace::translateViewT(const glm::vec3& translation) {
     // mViewT = glm::translate(mViewT, translation);
     mViewT[3] = mViewT[3] + glm::vec4(translation, 0.0f);
@@ -109,11 +109,11 @@ void GlSpace::setViewRByCam() {
 
 // Getter
 glm::mat4 GlSpace::getObjectMatrix() const {
-    return mObjectT * mObjectR;
+    return mObjectR * mObjectT;
 }
 
 glm::mat4 GlSpace::getViewMatrix() const {
-    return mViewR * mViewT; // Reverse Order because mEyeR * mEyeT
+    return mViewR * mViewT; // Reverse Order because mEyeT * mEyeR
 }
 
 glm::mat4 GlSpace::getPerspective() const {

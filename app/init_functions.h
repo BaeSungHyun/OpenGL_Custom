@@ -6,9 +6,12 @@
 #include <GLFW/glfw3.h>
 #include "rendering.h"
 
+// initial Global Variables
 int WIDTH = 800;
 int HEIGHT = 600;
 
+float NEAR = 0.1f;
+float FAR = 100.0f;
 
 void windowInit() {
     glfwInit();
