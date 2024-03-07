@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "vertex.h"
 
+// Object Role : Add Vertex, Indice, Texture, Normals ShaderProgram
 
 
 // OpenGL Binding Object Class

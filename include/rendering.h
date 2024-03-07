@@ -7,6 +7,8 @@
 #include "pre_rendering.h"
 #include "glSpace.h"
 
+// Object Role : Matrix Multplications OpenGL Space, Uniform variables, Lighting Calculation
+
 template <typename T>
 class Renderer : public Pre_Rendering<T> {
 public:

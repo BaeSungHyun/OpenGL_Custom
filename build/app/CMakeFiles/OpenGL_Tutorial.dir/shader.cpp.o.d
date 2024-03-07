@@ -1,6 +1,7 @@
 app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: \
  /home/baebae/Opengl/app/shader.cpp /usr/include/stdc-predef.h \
- /home/baebae/Opengl/app/shader.h /home/baebae/Opengl/include/glad/glad.h \
+ /home/baebae/Opengl/include/shader.h \
+ /home/baebae/Opengl/include/glad/glad.h \
  /home/baebae/Opengl/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \

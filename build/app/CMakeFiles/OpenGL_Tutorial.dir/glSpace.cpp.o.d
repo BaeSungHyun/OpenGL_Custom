@@ -1,6 +1,6 @@
 app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o: \
  /home/baebae/Opengl/app/glSpace.cpp /usr/include/stdc-predef.h \
- /home/baebae/Opengl/app/glSpace.h \
+ /home/baebae/Opengl/include/glSpace.h \
  /home/baebae/Opengl/include/glm/glm.hpp \
  /home/baebae/Opengl/include/glm/detail/_fixes.hpp \
  /usr/include/c++/11/cmath \
