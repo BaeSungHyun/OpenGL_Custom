@@ -1,4 +1,5 @@
-set(PRJ_SRC_CODES 
+set(PRJ_SRC_CODES
+    glLight.cpp
     glSpace.cpp
     shader.cpp
     main.cpp)

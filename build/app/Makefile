@@ -160,6 +160,30 @@ OpenGL_Tutorial/fast:
 	cd /home/baebae/Opengl/build && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/OpenGL_Tutorial.dir/build.make app/CMakeFiles/OpenGL_Tutorial.dir/build
 .PHONY : OpenGL_Tutorial/fast
 
+glLight.o: glLight.cpp.o
+.PHONY : glLight.o
+
+# target to build an object file
+glLight.cpp.o:
+	cd /home/baebae/Opengl/build && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/OpenGL_Tutorial.dir/build.make app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o
+.PHONY : glLight.cpp.o
+
+glLight.i: glLight.cpp.i
+.PHONY : glLight.i
+
+# target to preprocess a source file
+glLight.cpp.i:
+	cd /home/baebae/Opengl/build && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/OpenGL_Tutorial.dir/build.make app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.i
+.PHONY : glLight.cpp.i
+
+glLight.s: glLight.cpp.s
+.PHONY : glLight.s
+
+# target to generate assembly for a file
+glLight.cpp.s:
+	cd /home/baebae/Opengl/build && $(MAKE) $(MAKESILENT) -f app/CMakeFiles/OpenGL_Tutorial.dir/build.make app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.s
+.PHONY : glLight.cpp.s
+
 glSpace.o: glSpace.cpp.o
 .PHONY : glSpace.o
 
@@ -244,6 +268,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... OpenGL_Tutorial"
+	@echo "... glLight.o"
+	@echo "... glLight.i"
+	@echo "... glLight.s"
 	@echo "... glSpace.o"
 	@echo "... glSpace.i"
 	@echo "... glSpace.s"

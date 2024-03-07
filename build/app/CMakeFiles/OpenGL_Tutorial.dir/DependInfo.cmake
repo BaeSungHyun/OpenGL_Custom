@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/baebae/Opengl/app/glLight.cpp" "app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o" "gcc" "app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o.d"
   "/home/baebae/Opengl/app/glSpace.cpp" "app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o" "gcc" "app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o.d"
   "/home/baebae/Opengl/app/main.cpp" "app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o" "gcc" "app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o.d"
   "/home/baebae/Opengl/app/shader.cpp" "app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o" "gcc" "app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o.d"

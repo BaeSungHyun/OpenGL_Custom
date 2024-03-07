@@ -69,10 +69,24 @@ include app/CMakeFiles/OpenGL_Tutorial.dir/progress.make
 # Include the compile flags for this target's objects.
 include app/CMakeFiles/OpenGL_Tutorial.dir/flags.make
 
+app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/flags.make
+app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o: /home/baebae/Opengl/app/glLight.cpp
+app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o"
+	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o -MF CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o.d -o CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o -c /home/baebae/Opengl/app/glLight.cpp
+
+app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.i"
+	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/baebae/Opengl/app/glLight.cpp > CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.i
+
+app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.s"
+	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/baebae/Opengl/app/glLight.cpp -o CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.s
+
 app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/flags.make
 app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o: /home/baebae/Opengl/app/glSpace.cpp
 app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o"
 	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o -MF CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o.d -o CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o -c /home/baebae/Opengl/app/glSpace.cpp
 
 app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.i: cmake_force
@@ -86,7 +100,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.s: cmake_force
 app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/flags.make
 app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: /home/baebae/Opengl/app/shader.cpp
 app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o"
 	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o -MF CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o.d -o CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o -c /home/baebae/Opengl/app/shader.cpp
 
 app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.i: cmake_force
@@ -100,7 +114,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.s: cmake_force
 app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/flags.make
 app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: /home/baebae/Opengl/app/main.cpp
 app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: app/CMakeFiles/OpenGL_Tutorial.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o"
 	cd /home/baebae/Opengl/build/app && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o -MF CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o.d -o CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o -c /home/baebae/Opengl/app/main.cpp
 
 app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.i: cmake_force
@@ -113,6 +127,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.s: cmake_force
 
 # Object files for target OpenGL_Tutorial
 OpenGL_Tutorial_OBJECTS = \
+"CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o" \
 "CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o" \
 "CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o" \
 "CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o"
@@ -120,6 +135,7 @@ OpenGL_Tutorial_OBJECTS = \
 # External object files for target OpenGL_Tutorial
 OpenGL_Tutorial_EXTERNAL_OBJECTS =
 
+app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/glLight.cpp.o
 app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/glSpace.cpp.o
 app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/shader.cpp.o
 app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o
@@ -127,7 +143,7 @@ app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/build.make
 app/OpenGL_Tutorial: 3rd/libglad.a
 app/OpenGL_Tutorial: /home/baebae/Opengl/3rd/libglfw3.a
 app/OpenGL_Tutorial: app/CMakeFiles/OpenGL_Tutorial.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable OpenGL_Tutorial"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/baebae/Opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable OpenGL_Tutorial"
 	cd /home/baebae/Opengl/build/app && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OpenGL_Tutorial.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
