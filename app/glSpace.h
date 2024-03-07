@@ -23,16 +23,24 @@ public:
     // View Matrix (inverse of Eye Matrix) - Recommended to use Camera Methods
     void rotateViewR(const float& angleDegrees, const glm::vec3& axis);
     void translateViewT(const glm::vec3& translation);
-    // Eye Matrix
+    // Eye Matrix 
     void rotateEyeR(const float& angleDegrees, const glm::vec3& axis);
     void translateEyeT(const glm::vec3& translation);
     void convertEyeToView();
+
+    void rotateFirstEyeR(const float& angleDegrees, const glm::vec3& axis);
+    
+    // Depth Center Matrix
+    void rotateDepthCenterR(const float& angleDegrees, const glm::vec3& axis);
+    void setDepthCenterT_z(const float zMiddle);
     // Projection Matrix
     void perspective(const float&, const float&, const float&, const float&, const float&);
     void ortho();
 
     glm::mat4 getObjectMatrix() const;
     glm::mat4 getViewMatrix() const;
+    glm::mat4 getFirstEyeRMatrix() const;
+    glm::mat4 getCenterMatrix() const;
     glm::mat4 getPerspective() const;
     glm::mat4 getOrtho() const;
 
@@ -55,6 +63,14 @@ private:
     glm::mat4 mEyeT; // Eye Matrix ( Translate Part )
     glm::mat4 mEyeR; // Eye Matrix ( Rotate Part )
     glm::quat qEyeR; // Eye Quaternion ( Rotate Part )
+
+    glm::mat4 mFirstEyeR; // first eye R matrix
+    glm::quat qFirstEyeR;
+
+    glm::mat4 mDepthCenterT; // (0.0f, 0.0f, (zNear + zFar) / 2) --> going into projection matrix
+    glm::mat4 mDepthCenterT_inverse;
+    glm::mat4 mDepthCenterR; 
+    glm::quat qDepthCenterR;
 
     glm::vec3 cameraPos; // Camera Position - it's the world that is moving, not camera
     glm::vec3 cameraTarget; // Camera Target

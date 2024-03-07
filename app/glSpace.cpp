@@ -7,7 +7,10 @@ GlSpace::GlSpace() :
     qViewR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)), // View Quaternion for Rotation
     mEyeT(glm::mat4(1.0f)), mEyeR(glm::mat4(1.0f)), // Eye Matrix (Translation + Rotation)
     qEyeR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)), // Eye Quaternion for Rotation
-    cameraPos(), cameraTarget(), cameraX(), cameraY(), cameraZ() // camera Vectors default initialized
+    cameraPos(), cameraTarget(), cameraX(), cameraY(), cameraZ(), // camera Vectors default initialized
+    mDepthCenterT(glm::mat4(1.0f)), mDepthCenterR(glm::mat4(1.0f)), mDepthCenterT_inverse(glm::mat4(1.0f)),
+    qDepthCenterR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f)),
+    mFirstEyeR(glm::mat4(1.0f)), qFirstEyeR(glm::qua(1.0f, 0.0f, 0.0f, 0.0f))
 {
     // all matrix initialized with Identity Matrix
     // Quaternion initialized to w = 1.0f and other = 0.0f
@@ -48,7 +51,7 @@ void GlSpace::rotateEyeR(const float& angleDegrees, const glm::vec3& axis) {
     float angleRadians = glm::radians(angleDegrees);
     // Create a quaternion representing the rotation
     qEyeR = glm::angleAxis(angleRadians, glm::normalize(axis));
-    mEyeR = mEyeR * glm::toMat4(qEyeR);
+    mEyeR = mEyeR * glm::toMat4(qEyeR); 
 }
 
 void GlSpace::translateEyeT(const glm::vec3& translation) {
@@ -62,6 +65,26 @@ void GlSpace::convertEyeToView() {
     mViewR[1] = mEyeR[1];
     mViewR[2] = mEyeR[2];
     mViewR = glm::transpose(mViewR);
+}
+
+void GlSpace::rotateFirstEyeR(const float& angleDegrees, const glm::vec3& axis) {
+    float angleRadians = glm::radians(angleDegrees);
+    qFirstEyeR = glm::angleAxis(angleRadians, glm::normalize(axis));
+    mFirstEyeR = mFirstEyeR * glm::toMat4(qFirstEyeR);
+}
+
+// Depth Center Matrix
+void GlSpace::rotateDepthCenterR(const float& angleDegrees, const glm::vec3& axis) {
+    float angleRadians = glm::radians(angleDegrees);
+    // Create a quaternion representing the rotation
+    qDepthCenterR = glm::angleAxis(angleRadians, glm::normalize(axis));
+    mDepthCenterR = mDepthCenterR * glm::toMat4(qDepthCenterR);
+}
+
+void GlSpace::setDepthCenterT_z(const float zMiddle) {
+    // Minus : think about z-axis direction in Eye Frame and Conventional OpenGL Frame
+    mDepthCenterT[3][2] = -zMiddle;
+    mDepthCenterT_inverse[3][2] = zMiddle;
 }
 
 // Projection Matrix
@@ -113,7 +136,15 @@ glm::mat4 GlSpace::getObjectMatrix() const {
 }
 
 glm::mat4 GlSpace::getViewMatrix() const {
-    return mViewR * mViewT; // Reverse Order because mEyeT * mEyeR
+    return mViewT * mViewR; // Reverse Order because mEyeT * mEyeR
+}
+
+glm::mat4 GlSpace::getFirstEyeRMatrix() const {
+    return mFirstEyeR;
+}
+
+glm::mat4 GlSpace::getCenterMatrix() const {
+    return mDepthCenterT * mDepthCenterR * mDepthCenterT_inverse;
 }
 
 glm::mat4 GlSpace::getPerspective() const {

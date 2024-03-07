@@ -72,14 +72,26 @@ public:
         glSpace.convertEyeToView();
     }
 
+    void rotateFirstEyeMat(const float& angleDegrees, const glm::vec3& axis) {
+        glSpace.rotateFirstEyeR(angleDegrees, axis);
+    }
+
+    void rotateDepthCenterMat(const float& angleDegrees, const glm::vec3& axis) {
+        glSpace.rotateDepthCenterR(angleDegrees, axis);
+    }
+
     void setCamera(const glm::vec3& pos, const glm::vec3& tar) {
         glSpace.setCamPos(pos);
         glSpace.setCamTar(tar);
         glSpace.setCamAxes();
 
-        glSpace.setViewTByCam(); // Eye
-        glSpace.setViewRByCam(); // Eye
+        glSpace.setViewTByCam(); // View & Eye (inverse relationship)
+        glSpace.setViewRByCam(); // View & Eye (inverse relationship)
     } 
+
+    void setDepthCenter(const float zMiddle) {
+        glSpace.setDepthCenterT_z(zMiddle);
+    }
 
     void setProjectionPerspective(const float& fovDegree, const float& width, 
             const float& height, const float& zNear, const float& zFar) {
@@ -90,10 +102,20 @@ public:
         int objectLoc = this->shaderProgram.findUniformLocation("object");
         this->shaderProgram.changeUniformGlm(objectLoc, glm::value_ptr(glSpace.getObjectMatrix()));
     }
-    // Eye
+    // View & Eye
     void setUniformView() const {
         int viewLoc = this->shaderProgram.findUniformLocation("view");
         this->shaderProgram.changeUniformGlm(viewLoc, glm::value_ptr(glSpace.getViewMatrix()));
+    }
+
+    void setUniformFirstEyeR() const {
+        int eyeRLoc = this->shaderProgram.findUniformLocation("eyeR");
+        this->shaderProgram.changeUniformGlm(eyeRLoc, glm::value_ptr(glSpace.getFirstEyeRMatrix()));
+    }
+
+    void setUniformCenter() const {
+        int centerLoc = this->shaderProgram.findUniformLocation("center");
+        this->shaderProgram.changeUniformGlm(centerLoc, glm::value_ptr(glSpace.getCenterMatrix()));
     }
 
     void setUniformProjection() const {

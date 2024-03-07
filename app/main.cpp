@@ -31,13 +31,15 @@ int main(int, char**){
     // Renderer as global variable    
     renderer.useShaderProgram(); // shader program in use
 
-    // renderer.rotateObjectMat(-55.0f, glm::vec3(1.0f, 0.0f, 0.0f));
     renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, NEAR, FAR);
     renderer.setCamera(glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f)); // cameraPos, targetPos
+    renderer.setDepthCenter((NEAR + FAR) / 2);
 
     renderer.setUniformObject();
     renderer.setUniformView();
+    renderer.setUniformFirstEyeR();
     renderer.setUniformProjection();
+    renderer.setUniformCenter();
 
     // SAMPLES
     // renderer.sample_triangle();
@@ -50,7 +52,7 @@ int main(int, char**){
         renderer.glSettings({0.2f, 0.2f, 0.2f, 1.0f});
 
         if (FRAMEBUFFER_RESIZE) {
-            renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, 0.1f, 100.0f);
+            renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, NEAR, FAR);
             renderer.setUniformProjection();
             FRAMEBUFFER_RESIZE = false;
         }
@@ -71,16 +73,18 @@ int main(int, char**){
 
             if (KEY_SHIFT) {
                 // World (Object) Rotation
-                renderer.rotateObjectMat(offset, -tempAxis); // minus Axis
-                renderer.setUniformObject();
+                // renderer.rotateObjectMat(offset, -tempAxis); // minus Axis
+                // renderer.setUniformCenter();
+                renderer.rotateDepthCenterMat(offset, -tempAxis);
+                renderer.setUniformCenter();
             } else if (KEY_CTRL) {
                 // Eye Translation
                 renderer.translateEyeMat(glm::vec3(xOffset, yOffset, 0.0f));
                 renderer.setUniformView();
             } else {
                 // Eye Rotation
-                renderer.rotateEyeMat( offset, tempAxis); // plus Axis
-                renderer.setUniformView();
+                renderer.rotateFirstEyeMat( offset, tempAxis); // plus Axis
+                renderer.setUniformFirstEyeR();
             }
 
             B_POS = false;
