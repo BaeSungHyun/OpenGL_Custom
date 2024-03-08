@@ -41,11 +41,11 @@ public:
             }
             case DrawMode::DRAWELEMENTS : {
                 // Sample Control
-                float timeValue = glfwGetTime();
-                float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+                // float timeValue = glfwGetTime();
+                // float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
 
-                int vertexColorLocation = this->shaderProgram.findUniformLocation("uniColor");
-                this->shaderProgram.changeUniformFloat(vertexColorLocation, {0.0f, greenValue, 0.0f, 1.0f});
+                // int vertexColorLocation = this->shaderProgram.findUniformLocation("uniColor");
+                // this->shaderProgram.changeUniformFloat(vertexColorLocation, {0.0f, greenValue, 0.0f, 1.0f});
                 glDrawElements(GL_TRIANGLES, this->totalIndices, GL_UNSIGNED_INT, 0); 
                 break;
             }
@@ -123,6 +123,11 @@ public:
     void setUniformProjection() const {
         int projectionLoc = this->shaderProgram.findUniformLocation("projection");
         this->shaderProgram.changeUniformGlm(projectionLoc, glm::value_ptr(glSpace.getPerspective()));
+    }
+
+    void setTextureUnit() const {
+        int textureLoc = this->shaderProgram.findUniformLocation("ourTexture");
+        this->shaderProgram.setTextureUnit(textureLoc, 0);
     }
 
 private:

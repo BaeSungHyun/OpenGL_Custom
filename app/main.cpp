@@ -40,10 +40,12 @@ int main(int, char**){
     renderer.setUniformFirstEyeR();
     renderer.setUniformProjection();
     renderer.setUniformCenter();
+    renderer.setTextureUnit();
 
     // SAMPLES
     // renderer.sample_triangle();
-    renderer.sample_rectangle();
+    // renderer.sample_rectangle();
+    renderer.sample_texture_rectangle();
 
     // Render loop
     while (!glfwWindowShouldClose(window)) {

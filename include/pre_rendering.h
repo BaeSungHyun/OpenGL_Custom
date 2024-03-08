@@ -4,6 +4,7 @@
 #include <iostream>
 #include "shader.h"
 #include "vertex.h"
+#include "image_loader.h"
 
 // Object Role : Add Vertex, Indice, Texture, Normals ShaderProgram
 
@@ -27,6 +28,7 @@ public:
     // Samples
     void sample_triangle();
     void sample_rectangle();
+    void sample_texture_rectangle();
 
 protected:
     Shader shaderProgram;
@@ -34,6 +36,8 @@ protected:
     // UNIQUE FOR EACH VAO
     
     enum { VBO, EBO, OBJ_SIZE };
+
+    unsigned int texture; // texture is not Buffer Object
     
     unsigned int VAO;
     unsigned int gl_buffer_obj [ OBJ_SIZE ];
@@ -51,6 +55,9 @@ protected:
     // Total Number of Vertices and Indices
     int totalVertices;
     int totalIndices;
+
+    // Image Loader 
+    Image_Loader imgLoader;
 };
 
 
@@ -59,7 +66,8 @@ template <typename T>
 Pre_Rendering<T>::Pre_Rendering() : 
     shaderProgram("/home/baebae/Opengl/glsl/vertex.shader", "/home/baebae/Opengl/glsl/fragment.shader"),
     size_pVertices(1), pIndices (nullptr),
-    VAO(0), totalVertices(0), totalIndices(0)
+    VAO(0), totalVertices(0), totalIndices(0),
+    imgLoader("/home/baebae/Opengl/wall.jpg")
 {
     pVertices = new Vertices<T> [size_pVertices];
 
@@ -74,6 +82,11 @@ Pre_Rendering<T>::~Pre_Rendering() {
     pVertices = nullptr;
     pVertexArray = nullptr;
     pIndices = nullptr;
+
+    // Causes Segmentation Fault
+    // glDeleteVertexArrays(1, &VAO);
+    // glDeleteBuffers(1, &(gl_buffer_obj[VBO]));
+    // glDeleteBuffers(1, &(gl_buffer_obj[EBO]));
 }
 
 template <typename T>
@@ -116,7 +129,7 @@ void Pre_Rendering<T>::sample_triangle() {
         {0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f}
     });
 
-    glGenBuffers(OBJ_SIZE - 1, gl_buffer_obj); // Doesn't need EBO
+    glGenBuffers(OBJ_SIZE - 1, gl_buffer_obj); // Doesn't need EBO and TXD
 
     vectorToArray();    
 
@@ -150,7 +163,7 @@ void Pre_Rendering<T>::sample_rectangle() {
 
     addIndices(std::vector<unsigned int> {0, 1, 3, 1, 2, 3});
 
-    glGenBuffers(OBJ_SIZE, gl_buffer_obj);
+    glGenBuffers(OBJ_SIZE, gl_buffer_obj); 
 
     vectorToArray();
 
@@ -174,7 +187,70 @@ void Pre_Rendering<T>::sample_rectangle() {
     // location = 1 : color
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, rgba));
     glEnableVertexAttribArray(1);    
+}
 
+template<typename T>
+void Pre_Rendering<T>::sample_texture_rectangle() {
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+    addVertices({
+        // positions      colors            texture coords
+        {0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f}, // top right
+        {0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f}, // bottom right
+        {-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f}, // bottom left
+        {-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f} // top left
+    });
+
+    addIndices(std::vector<unsigned int> {0, 1, 3, 1, 2, 3});
+
+    glGenBuffers(OBJ_SIZE, gl_buffer_obj);
+
+    vectorToArray();
+
+    glBindBuffer(GL_ARRAY_BUFFER, gl_buffer_obj[VBO]); // pos + rgba
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex<T>) * (pVertices[size_pVertices - 1].vecVertex.size()),
+                    pVertexArray, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_buffer_obj[EBO]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * totalIndices, (const void*)(pIndices), GL_STATIC_DRAW);
+
+    glGenTextures(1, &texture);
+    glActiveTexture(GL_TEXTURE0);; // activate texture unit first
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    // set the texture wrapping/filtering options (on currently bound textures)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // x 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // y 
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT); // z 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // not using GL_TEXTURE_MIPMAP_MIN because mipmap level is 0 below.
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    if (imgLoader.getData()) {
+        // first param: specify the texture target.
+        // second param: mipmap level for which we want to create a texture for. 
+        // third param: what kind of format to store the texture.
+        // fourth, fifth param: sets the width, height of the resulting texture.
+        // sixth param: should always be zero (legacy)
+        // seventh, eighth param: specify the foramt and datatype of the source image. 
+        // ninth param: 
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 
+            imgLoader.getWidth(), imgLoader.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, imgLoader.getData());
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+
+    imgLoader.releaseImgMem();
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, pos));
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, rgba));
+    glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, texture));
+    glEnableVertexAttribArray(2);
 }
 
 

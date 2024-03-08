@@ -1,9 +1,12 @@
 #version 400 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec4 aColor;
+layout (location = 2) in vec2 aTexCoord;
 
 out vec4 ourColor;
+out vec2 TexCoord;
 
+// uniform Material material;
 uniform mat4 object;
 uniform mat4 view;
 uniform mat4 center;
@@ -16,4 +19,5 @@ void main() {
     gl_Position = projection * eyeR * center * view * object * vec4(aPos, 1.0);
     // gl_Position = projection * center * view * object * vec4(aPos, 1.0);
     ourColor = aColor;
+    TexCoord = aTexCoord;
 }

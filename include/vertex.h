@@ -9,6 +9,8 @@ template <typename T>
 struct Vertex {
     T pos[3] {}; // default initialize to 0
     T rgba[4] {}; // default initialize to 0
+    T texture[2] {};
+    T normals[3] {};
 
     Vertex() = default;
 
@@ -16,14 +18,16 @@ struct Vertex {
         range_initialize(init.begin(), init.end());
     };
 
-    // for vector push_back
-    Vertex& operator=(const Vertex& other) {
+    // for vector push_back 
+    Vertex& operator=(const Vertex& other) { // copy assignemnt
         if (this == &other) {
             return *this;
         }
 
         for (int i = 0; i < 3; i++) pos[i] = other.pos[i];
         for (int i = 0; i < 4; i++) rgba[i] = other.rgba[i];
+        for (int i = 0; i < 3; i++) normals[i] = other.normals[i];
+        for (int i = 0; i < 2; i++) texture[i] = other.texture[i];
 
         return *this; // return reference to the current object
     }
@@ -36,6 +40,8 @@ private:
             for (; first != last; first++) {
                 if (index < 3) pos[index++] = *first;
                 else if (index >= 3) rgba[index++ - 3] = *first;
+                else if (index >= 6) texture[index++ - 6] = *first;
+                else if (index >= 9) normals[index++ - 9] = *first;
             }
         } catch (const std::exception& e) {
             std::cout << "Caught an exception : " << e.what() << std::endl;

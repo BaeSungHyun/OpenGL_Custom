@@ -111,3 +111,7 @@ void Shader::changeUniformGlm(const int& loc, const float* value) const {
     glUniformMatrix4fv(loc, 1, GL_FALSE, value);
 }
 
+void Shader::setTextureUnit(const int& loc, const int& num) const {
+    glUniform1i(loc, num);
+}
+
