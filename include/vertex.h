@@ -38,10 +38,10 @@ private:
         try {
             int index{0};
             for (; first != last; first++) {
-                if (index < 3) pos[index++] = *first;
-                else if (index >= 3) rgba[index++ - 3] = *first;
-                else if (index >= 6) texture[index++ - 6] = *first;
-                else if (index >= 9) normals[index++ - 9] = *first;
+                if (index < 3) pos[index++] = *first; // 0, 1, 2
+                else if (index < 7) rgba[index++ - 3] = *first; // 3, 4, 5, 6
+                else if (index < 9) texture[index++ - 7] = *first; // 7, 8
+                else if (index < 12) normals[index++ - 9] = *first; // 9, 10, 11
             }
         } catch (const std::exception& e) {
             std::cout << "Caught an exception : " << e.what() << std::endl;
