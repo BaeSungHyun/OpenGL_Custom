@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "vertex.h"
 #include "image_loader.h"
+#include "glLight.h"
 
 // Object Role : Add Vertex, Indice, Texture, Normals ShaderProgram
 
@@ -31,10 +32,12 @@ public:
     void sample_texture_rectangle();
 
 protected:
+    // Shader
     Shader shaderProgram;
-    
+    // Image Loader (texture)
+    Image_Loader imgLoader;
+
     // UNIQUE FOR EACH VAO
-    
     enum { VBO, EBO, OBJ_SIZE };
 
     unsigned int texture; // texture is not Buffer Object
@@ -55,9 +58,6 @@ protected:
     // Total Number of Vertices and Indices
     int totalVertices;
     int totalIndices;
-
-    // Image Loader 
-    Image_Loader imgLoader;
 };
 
 
@@ -67,7 +67,7 @@ Pre_Rendering<T>::Pre_Rendering() :
     shaderProgram("/home/baebae/Opengl/glsl/vertex.shader", "/home/baebae/Opengl/glsl/fragment.shader"),
     size_pVertices(1), pIndices (nullptr),
     VAO(0), totalVertices(0), totalIndices(0),
-    imgLoader("/home/baebae/Opengl/wall.jpg")
+    imgLoader("/home/baebae/Opengl/wall.jpg", true) // flip vertical set to 'true'
 {
     pVertices = new Vertices<T> [size_pVertices];
 
@@ -252,6 +252,7 @@ void Pre_Rendering<T>::sample_texture_rectangle() {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex<T>), (const void*)offsetof(Vertex<T>, texture));
     glEnableVertexAttribArray(2);
 }
+
 
 
 #endif

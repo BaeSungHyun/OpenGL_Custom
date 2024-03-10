@@ -6,6 +6,7 @@
 #include <math.h>
 #include "pre_rendering.h"
 #include "glSpace.h"
+#include "glLight.h"
 
 // Object Role : Matrix Multplications OpenGL Space, Uniform variables, Lighting Calculation
 
@@ -82,6 +83,10 @@ public:
         glSpace.rotateDepthCenterR(angleDegrees, axis);
     }
 
+    void setAmbient(float r, float g, float b) {
+        glLight.setAmbient(glm::vec3(r, g, b));
+    }
+
     void setCamera(const glm::vec3& pos, const glm::vec3& tar) {
         glSpace.setCamPos(pos);
         glSpace.setCamTar(tar);
@@ -102,27 +107,27 @@ public:
 
     void setUniformObject() const {
         int objectLoc = this->shaderProgram.findUniformLocation("object");
-        this->shaderProgram.changeUniformGlm(objectLoc, glm::value_ptr(glSpace.getObjectMatrix()));
+        this->shaderProgram.changeUniformMatrix4fv(objectLoc, glm::value_ptr(glSpace.getObjectMatrix()));
     }
     // View & Eye
     void setUniformView() const {
         int viewLoc = this->shaderProgram.findUniformLocation("view");
-        this->shaderProgram.changeUniformGlm(viewLoc, glm::value_ptr(glSpace.getViewMatrix()));
+        this->shaderProgram.changeUniformMatrix4fv(viewLoc, glm::value_ptr(glSpace.getViewMatrix()));
     }
 
     void setUniformFirstEyeR() const {
         int eyeRLoc = this->shaderProgram.findUniformLocation("eyeR");
-        this->shaderProgram.changeUniformGlm(eyeRLoc, glm::value_ptr(glSpace.getFirstEyeRMatrix()));
+        this->shaderProgram.changeUniformMatrix4fv(eyeRLoc, glm::value_ptr(glSpace.getFirstEyeRMatrix()));
     }
 
     void setUniformCenter() const {
         int centerLoc = this->shaderProgram.findUniformLocation("center");
-        this->shaderProgram.changeUniformGlm(centerLoc, glm::value_ptr(glSpace.getCenterMatrix()));
+        this->shaderProgram.changeUniformMatrix4fv(centerLoc, glm::value_ptr(glSpace.getCenterMatrix()));
     }
 
     void setUniformProjection() const {
         int projectionLoc = this->shaderProgram.findUniformLocation("projection");
-        this->shaderProgram.changeUniformGlm(projectionLoc, glm::value_ptr(glSpace.getPerspective()));
+        this->shaderProgram.changeUniformMatrix4fv(projectionLoc, glm::value_ptr(glSpace.getPerspective()));
     }
 
     void setTextureUnit() const {
@@ -130,7 +135,13 @@ public:
         this->shaderProgram.setTextureUnit(textureLoc, 0);
     }
 
+    void setUniformLight() const {
+        int lightLoc = this->shaderProgram.findUniformLocation("lightColor");
+        this->shaderProgram.changeUniformVector3fv(lightLoc, glm::value_ptr(glLight.getCombined()));
+    }
+
 private:
+    GlLight glLight;
     GlSpace glSpace;
 };
 #endif

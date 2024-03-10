@@ -107,11 +107,15 @@ void Shader::changeUniformFloat(const int& loc, const std::initializer_list<floa
     glUniform4f(loc, temp_val[0], temp_val[1], temp_val[2], temp_val[3]);
 }
 
-void Shader::changeUniformGlm(const int& loc, const float* value) const {
+void Shader::changeUniformMatrix4fv(const int& loc, const float* value) const {
     glUniformMatrix4fv(loc, 1, GL_FALSE, value);
 }
 
 void Shader::setTextureUnit(const int& loc, const int& num) const {
     glUniform1i(loc, num);
+}
+
+void Shader::changeUniformVector3fv(const int& loc, const float* value) const {
+    glUniform3fv(loc, 1, value);
 }
 

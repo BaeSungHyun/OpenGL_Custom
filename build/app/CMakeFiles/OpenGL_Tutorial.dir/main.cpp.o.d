@@ -203,7 +203,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
- /home/baebae/Opengl/include/glSpace.h \
+ /home/baebae/Opengl/include/glLight.h \
  /home/baebae/Opengl/include/glm/glm.hpp \
  /home/baebae/Opengl/include/glm/detail/_fixes.hpp \
  /home/baebae/Opengl/include/glm/detail/setup.hpp \
@@ -400,6 +400,7 @@ app/CMakeFiles/OpenGL_Tutorial.dir/main.cpp.o: \
  /home/baebae/Opengl/include/glm/gtc/../gtc/../ext/vector_uint1_sized.hpp \
  /usr/include/c++/11/cstring \
  /home/baebae/Opengl/include/glm/gtc/type_ptr.inl \
+ /home/baebae/Opengl/include/glSpace.h \
  /home/baebae/Opengl/include/glm/gtx/quaternion.hpp \
  /home/baebae/Opengl/include/glm/gtx/../ext/quaternion_exponential.hpp \
  /home/baebae/Opengl/include/glm/gtx/../ext/quaternion_exponential.inl \

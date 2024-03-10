@@ -30,8 +30,9 @@ public:
     int findUniformLocation(const std::string& name) const; 
 
     void changeUniformFloat(const int& loc, const std::initializer_list<float>& value) const; 
-    void changeUniformGlm(const int& loc, const float* value) const;
+    void changeUniformMatrix4fv(const int& loc, const float* value) const;
     void setTextureUnit(const int& loc, const int& num) const;
+    void changeUniformVector3fv(const int& loc, const float* value) const;
 };
 
 

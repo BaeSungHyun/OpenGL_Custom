@@ -46,6 +46,9 @@
         "exception": "cpp",
         "iosfwd": "cpp",
         "numbers": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "iomanip": "cpp"
     }
 }

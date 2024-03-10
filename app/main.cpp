@@ -34,6 +34,7 @@ int main(int, char**){
     renderer.setProjectionPerspective(45.0f, WIDTH, HEIGHT, NEAR, FAR);
     renderer.setCamera(glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f)); // cameraPos, targetPos
     renderer.setDepthCenter((NEAR + FAR) / 2);
+    // renderer.setAmbient(1.0f, 0.0f, 0.0f); // Red Ambient Light
 
     renderer.setUniformObject();
     renderer.setUniformView();
@@ -41,6 +42,7 @@ int main(int, char**){
     renderer.setUniformProjection();
     renderer.setUniformCenter();
     renderer.setTextureUnit();
+    renderer.setUniformLight();
 
     // SAMPLES
     // renderer.sample_triangle();

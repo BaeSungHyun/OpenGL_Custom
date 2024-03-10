@@ -10,7 +10,8 @@ public:
         data = nullptr;
     }
 
-    Image_Loader(const std::string& filepath) {
+    Image_Loader(const std::string& filepath, bool flipVertical = false) {
+        if (flipVertical) flipVertically();
         data = stbi_load(filepath.c_str(), &width, &height, &nChannels, 0);
     }
 
@@ -28,6 +29,11 @@ public:
 
     int getChannels() const {
         return nChannels;
+    }
+
+    // image y-axis and OpenGL conventional y-axis is different.
+    void flipVertically() const {
+        stbi_set_flip_vertically_on_load(true); // should come before loaindg any image
     }
 
     void releaseImgMem() const {
