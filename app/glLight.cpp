@@ -8,7 +8,7 @@ GlLight::GlLight() :
 }
 
 void GlLight::setAmbient(const glm::vec3 input) {
-        ambient = input;
+    ambient = input;
 }
 
 void GlLight::setDiffuse(const glm::vec3 input) {
