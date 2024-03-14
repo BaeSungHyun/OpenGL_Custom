@@ -87,6 +87,14 @@ public:
         glLight.setAmbient(glm::vec3(r, g, b));
     }
 
+    void setDiffuse(const glm::vec3& pos) {
+        glLight.setDiffuse(pos);
+    }
+
+    void setLightPos(const glm::vec3& pos) {
+        glLight.setLightPos(pos);
+    }
+
     void setCamera(const glm::vec3& pos, const glm::vec3& tar) {
         glSpace.setCamPos(pos);
         glSpace.setCamTar(tar);
@@ -137,7 +145,10 @@ public:
 
     void setUniformLight() const {
         int lightLoc = this->shaderProgram.findUniformLocation("lightColor");
+        int lightPos = this->shaderProgram.findUniformLocation("lightPos");
+
         this->shaderProgram.changeUniformVector3fv(lightLoc, glm::value_ptr(glLight.getCombined()));
+        this->shaderProgram.changeUniformVector3fv(lightPos, glm::value_ptr(glLight.getLightPos()));
     }
 
 private:

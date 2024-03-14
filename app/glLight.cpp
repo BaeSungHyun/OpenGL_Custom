@@ -3,19 +3,25 @@
 GlLight::GlLight() :
     ambient(glm::vec3(1.0f)),
     diffuse(glm::vec3(1.0f)),
-    specular(glm::vec3(1.0f))    
+    specular(glm::vec3(1.0f)),
+    lightPos(glm::vec3(1.0f))    
 {
 }
 
-void GlLight::setAmbient(const glm::vec3 input) {
+void GlLight::setLightPos(const glm::vec3& input) {
+    lightPos = input;
+}
+
+
+void GlLight::setAmbient(const glm::vec3& input) {
     ambient = input;
 }
 
-void GlLight::setDiffuse(const glm::vec3 input) {
+void GlLight::setDiffuse(const glm::vec3& input) {
     diffuse = input;
 }
 
-void GlLight::setSpecular(const glm::vec3 input) {
+void GlLight::setSpecular(const glm::vec3& input) {
     specular = input;
 }
 
@@ -33,4 +39,8 @@ glm::vec3 GlLight::getSpecular() const {
 
 glm::vec3 GlLight::getCombined() const {
     return ambient * diffuse * specular;
+}
+
+glm::vec3 GlLight::getLightPos() const {
+    return lightPos;
 }

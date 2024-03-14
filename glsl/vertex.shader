@@ -7,6 +7,7 @@ layout (location = 3) in vec3 aNormal;
 out vec4 ourColor;
 out vec2 TexCoord;
 out vec3 Normal;
+out vec3 FragPos; // object space -> object matrix -> world space
 
 // uniform Material material;
 uniform mat4 object;
@@ -23,4 +24,5 @@ void main() {
     ourColor = aColor;
     TexCoord = aTexCoord;
     Normal = aNormal;
+    FragPos = vec3(object * vec4(aPos, 1.0));
 }
