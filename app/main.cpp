@@ -38,7 +38,7 @@ int main(int, char**){
     // Light
     renderer.setAmbient(0.5f, 0.5f, 0.5f); // Red Ambient Light
     renderer.setDiffuse(glm::vec3(0.4f, 0.0f, 0.0f));
-    renderer.setLightPos(glm::vec3(0.0f, 100.0f, 100.0f));
+    renderer.setLightPos(glm::vec3(0.0f, 100.0f, -100.0f));
 
     renderer.setUniformObject();
     renderer.setUniformView();
