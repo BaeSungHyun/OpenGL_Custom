@@ -27,6 +27,12 @@ void main() {
     float diff = max(dot(norm, lightDir), 0.0); // never become zero
     vec3 diffuse = diff * lightColor;
 
-    vec3 result = (ambient +  diffuse);
+    vec3 viewDir = normalize(-FragPos); // viewPos = 0,0,0 because from viewPos
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); // 32 : shininess value of the highlight
+    float specularStrength = 0.5;
+    vec3 specular = specularStrength * spec * lightColor;
+
+    vec3 result = (ambient +  diffuse + specular);
     FragColor = vec4(result, 1.0);
 }

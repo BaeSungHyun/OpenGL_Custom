@@ -23,6 +23,6 @@ void main() {
     // gl_Position = projection * center * view * object * vec4(aPos, 1.0);
     ourColor = aColor;
     TexCoord = aTexCoord;
-    Normal = aNormal;
-    FragPos = vec3(object * vec4(aPos, 1.0));
+    Normal = aNormal; // normal transformation : inverse transpose
+    FragPos = vec3(view * object * vec4(aPos, 1.0)); // view space
 }
